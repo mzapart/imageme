@@ -9,25 +9,24 @@
     yum:
       name: python
       state: latest
-  - name: cloning git repository
+  - name: cloning git repo
     git:
-      repo: https://github.com/jkanclerz/install-image-me.git
-      dest: ~/git
-   
+      repo: https://github.com/jkanclerz/google-search-python.git
+      dest: /srv/checkout
   - name: setting variable1
-    shell: echo "export SEARCH_ENGINE_ID=006879359584856769921:rplfy3clmho" >> .bashrc
+    shell: echo "SEARCH_ENGINE_ID=006879359584856769921:rplfy3clmho" >> .bashrc
   - name: setting variable2
-    shell: echo "export GOOGLE_CLOUD_API_KEY=AIzaSyDLLC1pqOxkWA8jUjM-Cfwbl_13Sh_2t98" >> .bashrc
+    shell: echo "GOOGLE_CLOUD_API_KEY=AIzaSyDLLC1pqOxkWA8jUjM-Cfwbl_13Sh_2t98" >> .bashrc
   
   - name: creating file if it doesn't exist 
     file:
-      path: /bin/image_me.sh
+      path: /bin/image_me
       state: touch
       mode: "u+rwx,g+rwx,o+rwx"
   - lineinfile:
-      path: /bin/image_me.sh
+      path: /bin/image_me
       line: '#!/bin/bash'
   - lineinfile:
-      path: /bin/image_me.sh
+      path: /bin/image_me
       line: 'python /home/ec2-user/google-search-python/image_me.py "$1"'
     
