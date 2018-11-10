@@ -1,0 +1,20 @@
+- hosts: install_imageMe
+  become: yes
+  tasks:
+  - name: install the latest version of git
+    yum:
+      name: git
+      state: latest
+  - name: install the latest version of python
+    yum:
+      name: python
+      state: latest
+  - name: cloning git repository
+    script: git clone https://github.com/jkanclerz/google-search-python.git
+    args:
+      creates: google-search-python/image_me.py
+  - name: setting variable1
+    shell: echo "export SEARCH_ENGINE_ID=006879359584856769921:rplfy3clmho" >> .bashrc
+  - name: setting variable2
+    shell: echo "export GOOGLE_CLOUD_API_KEY=AIzaSyDLLC1pqOxkWA8jUjM-Cfwbl_13Sh_2t98" >> .bashrc
+ 
